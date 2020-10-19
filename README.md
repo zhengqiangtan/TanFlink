@@ -20,7 +20,12 @@ mvn archetype:generate                               \
 
 
 
-### 三、问题解决
+### 三、问题记录
+1. DateSet 和 DataStream 的区别和联系 ？
+>  flink-java 这个模块中找到所有关于 DataSet 的核心类，DataStream 的核心实现类则在 flink-streaming-java 这个模块。
+>  Flink 的编程模型中，对于 DataSet 而言，Source 部分来源于文件、表或者 Java 集合；而 DataStream 的 Source 部分则一般是消息中间件比如 Kafka 等。
+>
+2. 其他
 
 
 
