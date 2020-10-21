@@ -51,6 +51,8 @@ public class CountWindowAverage extends RichFlatMapFunction<Tuple2<Long, Long>, 
 
 
     //  StateDesciptor
+    //  Flink 提供了 StateDesciptor 方法专门用来访问不同的 state，StateDesciptor 同时还可以通过 setQueryable 使状态变成可以查询状态。
+    //  可查询状态目前是一个 Beta 功能，暂时不推荐使用。
     public void open(Configuration config) {
         ValueStateDescriptor<Tuple2<Long, Long>> descriptor =
                 new ValueStateDescriptor<>(

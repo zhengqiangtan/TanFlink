@@ -31,3 +31,10 @@ mvn archetype:generate                               \
 
 ### 四、参考学习网址
 - [技术栈mstacks.com](http://mstacks.com/141/1505.html#content1505)
+- [你需要的不是实时数仓 | 你需要的是一款强大的OLAP数据库(上)](https://mp.weixin.qq.com/s/9MZ9ztr8fYJTl1HchqtQqA)
+
+
+
+---
+[Flink Kafka Connector Docs](https://ci.apache.org/projects/flink/flink-docs-stable/dev/connectors/kafka.html)
+
