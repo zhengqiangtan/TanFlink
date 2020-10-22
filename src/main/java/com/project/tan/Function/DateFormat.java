@@ -1,4 +1,4 @@
-package com.project.tan.UDF;
+package com.project.tan.Function;
 
 import org.apache.flink.table.functions.ScalarFunction;
 

@@ -1,4 +1,4 @@
-package com.project.tan.UDF;
+package com.project.tan.Function;
 
 import org.apache.flink.api.common.functions.RichFlatMapFunction;
 import org.apache.flink.api.common.state.StateTtlConfig;

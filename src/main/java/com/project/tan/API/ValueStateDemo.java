@@ -1,6 +1,6 @@
 package com.project.tan.API;
 
-import com.project.tan.UDF.CountWindowAverage;
+import com.project.tan.Function.CountWindowAverage;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
