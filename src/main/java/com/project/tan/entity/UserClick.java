@@ -1,6 +1,8 @@
 package com.project.tan.entity;
 
-
+/**
+ * 用户的行为信息
+ */
 public class UserClick {
 
     private String userId;
