@@ -41,7 +41,7 @@ public class TopN {
         Properties properties = new Properties();
         properties.setProperty("bootstrap.servers", "localhost:9092");
 
-        FlinkKafkaConsumer<String> consumer = new FlinkKafkaConsumer<>("test", new SimpleStringSchema(), properties);
+        FlinkKafkaConsumer<String> consumer = new FlinkKafkaConsumer<>("src/main/test", new SimpleStringSchema(), properties);
         //从最早开始消费
         consumer.setStartFromEarliest();
 
