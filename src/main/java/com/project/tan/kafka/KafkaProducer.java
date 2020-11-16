@@ -28,7 +28,7 @@ public class KafkaProducer {
         // 2.0 配置 KafkaProducer
         FlinkKafkaProducer<String> producer = new FlinkKafkaProducer<String>(
                 "127.0.0.1:9092", //broker 列表
-                "src/main/test",           //topic
+                "test",           //topic
                 new SimpleStringSchema()); // 消息序列化
 
         //写入 Kafka 时附加记录的事件时间戳

@@ -35,7 +35,7 @@ public class KakfaConsumer {
 
         //设置消费组
         properties.setProperty("group.id", "group_test");
-        FlinkKafkaConsumer<String> consumer = new FlinkKafkaConsumer<>("src/main/test", new SimpleStringSchema(), properties);
+        FlinkKafkaConsumer<String> consumer = new FlinkKafkaConsumer<>("test", new SimpleStringSchema(), properties);
 
         //设置从最早的offset消费
         consumer.setStartFromEarliest();
