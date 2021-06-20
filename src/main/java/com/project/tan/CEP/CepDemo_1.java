@@ -46,7 +46,9 @@ public class CepDemo_1 {
 
         );
 
-        //定义Pattern,寻找连续搜索帽子的用户
+        /**
+         *  定义Pattern,寻找连续搜索帽子的用户
+         */
         Pattern<Tuple3<String, String, Long>, Tuple3<String, String, Long>> pattern = Pattern.<Tuple3<String, String, Long>>begin("start")
                 .where(new SimpleCondition<Tuple3<String, String, Long>>() {
                     @Override

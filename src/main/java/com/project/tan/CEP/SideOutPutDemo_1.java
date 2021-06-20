@@ -60,8 +60,9 @@ public class SideOutPutDemo_1 {
             "The fair Ophelia!--Nymph, in thy orisons",
             "Be all my sins remember'd."
     };
-    private static final OutputTag<String> rejectedWordsTag = new OutputTag<String>("rejected") {
-    };
+
+    // 测输出打上标签
+    private static final OutputTag<String> rejectedWordsTag = new OutputTag<String>("rejected") {};
 
 
     /**

@@ -24,9 +24,7 @@ public class ParallelismDemo {
 //        DataSet<Tuple2<String, Integer>> counts =
 //
 //                text.flatMap(new LineSplitter())
-//
 //                        .groupBy(0)
-//
 //                        .sum(1).setParallelism(1);
 
         // 提交任务级别

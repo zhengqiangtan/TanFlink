@@ -3,6 +3,9 @@ package com.project.tan.Distinct;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.roaringbitmap.longlong.Roaring64NavigableMap;
 
+/**
+ * 使用 包 RoaringBitmap
+ */
 public class BitMapDistinct implements AggregateFunction<Long, Roaring64NavigableMap,Long> {
 
 

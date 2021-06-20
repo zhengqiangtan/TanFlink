@@ -2,8 +2,11 @@ package com.project.tan.FlinkSQL;
 
 import com.project.tan.entity.PageVisit;
 import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.runtime.state.filesystem.FsStateBackend;
+import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.Table;
@@ -23,6 +26,13 @@ public class RetractPvUvSQL {
 
         EnvironmentSettings bsSettings = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        env.setStateBackend(new FsStateBackend("",true));
+        env.enableCheckpointing(1000,CheckpointingMode.AT_LEAST_ONCE); //
+
+//        指定At-Least-Once语义，会取消屏障对齐，即算子收到第一个输入的屏障之后不会阻塞，而是触发快照。这样一来，部分属于检查点n + 1的数据也会包括进检查点n的数据里， 当恢复时，这部分交叉的数据就会被重复处理。
+
+
         StreamTableEnvironment tEnv = StreamTableEnvironment.create(env, bsSettings);
 
 //        ParameterTool params = ParameterTool.fromArgs(args);

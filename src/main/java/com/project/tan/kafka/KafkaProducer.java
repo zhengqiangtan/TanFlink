@@ -22,8 +22,9 @@ public class KafkaProducer {
 
         DataStreamSource<String> text = env.addSource(new MyNoParalleSource()).setParallelism(1);
 
-        Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "127.0.0.1:9092");
+//        Properties properties = new Properties();
+//        properties.setProperty("bootstrap.servers", "127.0.0.1:9092");
+//        new FlinkKafkaProducer<>("test",new SimpleStringSchema(),properties);
 
         // 2.0 配置 KafkaProducer
         FlinkKafkaProducer<String> producer = new FlinkKafkaProducer<String>(

@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * SideOutPut 分流 （推荐做法）
- *
+ * <p>
  * SideOutPut 是 Flink 框架为我们提供的最新的也是最为推荐的分流方法，可以多次进行拆分的，无需担心会爆出异常，在使用 SideOutPut 时，需要按照以下步骤进行：
  * <p>
  * 定义 OutputTag
@@ -52,19 +52,22 @@ public class SplitStreamDemo_3 {
         DataStreamSource<Tuple3<Integer, Integer, Integer>> items = env.fromCollection(data);
 
 
-        OutputTag<Tuple3<Integer, Integer, Integer>> zeroStream = new OutputTag<Tuple3<Integer, Integer, Integer>>("zeroStream") {};
-        OutputTag<Tuple3<Integer, Integer, Integer>> oneStream = new OutputTag<Tuple3<Integer, Integer, Integer>>("oneStream") {};
+        OutputTag<Tuple3<Integer, Integer, Integer>> zeroStream = new OutputTag<Tuple3<Integer, Integer, Integer>>("zeroStream") {
+        };
+        OutputTag<Tuple3<Integer, Integer, Integer>> oneStream = new OutputTag<Tuple3<Integer, Integer, Integer>>("oneStream") {
+        };
 
-        SingleOutputStreamOperator<Tuple3<Integer, Integer, Integer>> processStream = items.process(new ProcessFunction<Tuple3<Integer, Integer, Integer>, Tuple3<Integer, Integer, Integer>>() {
-            @Override
-            public void processElement(Tuple3<Integer, Integer, Integer> value, Context ctx, Collector<Tuple3<Integer, Integer, Integer>> out) throws Exception {
-                if (value.f0 == 0) {
-                    ctx.output(zeroStream, value);
-                } else if (value.f0 == 1) {
-                    ctx.output(oneStream, value);
-                }
-            }
-        });
+        SingleOutputStreamOperator<Tuple3<Integer, Integer, Integer>> processStream = items.process(
+                new ProcessFunction<Tuple3<Integer, Integer, Integer>, Tuple3<Integer, Integer, Integer>>() {
+                    @Override
+                    public void processElement(Tuple3<Integer, Integer, Integer> value, Context ctx, Collector<Tuple3<Integer, Integer, Integer>> out) throws Exception {
+                        if (value.f0 == 0) {
+                            ctx.output(zeroStream, value);
+                        } else if (value.f0 == 1) {
+                            ctx.output(oneStream, value);
+                        }
+                    }
+                });
         DataStream<Tuple3<Integer, Integer, Integer>> zeroSideOutput = processStream.getSideOutput(zeroStream);
         DataStream<Tuple3<Integer, Integer, Integer>> oneSideOutput = processStream.getSideOutput(oneStream);
 

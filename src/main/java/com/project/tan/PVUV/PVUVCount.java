@@ -24,6 +24,11 @@ import java.util.Properties;
  *
  * 周期性水印：AssignerWithPeriodicWatermarks
  * 特定事件触发水印：PunctuatedWatermark
+ *
+ * 单窗口内存统计
+ * 这种方法需要把一天内所有的数据进行缓存，然后在内存中遍历接收的数据，进行 PV 和 UV 的叠加统计。
+ *
+ *
  */
 public class PVUVCount {
 
@@ -73,10 +78,11 @@ public class PVUVCount {
 
         /**
          * 窗口触发器
+         * 每天从 0 点开始计算并且每天都会清空数据。
          */
         userClickSingleOutputStreamOperator
                 .windowAll(TumblingProcessingTimeWindows.of(Time.days(1), Time.hours(-8)))
-                .trigger(ContinuousProcessingTimeTrigger.of(Time.seconds(20)))
+                .trigger(ContinuousProcessingTimeTrigger.of(Time.seconds(20))) //每 20 秒触发一次计算输出中间结果。
                 .evictor(TimeEvictor.of(Time.seconds(0), true));
 
 

@@ -28,6 +28,9 @@ import org.apache.flink.streaming.connectors.redis.common.config.FlinkJedisPoolC
 import java.util.Properties;
 
 /**
+ *
+ * 分组窗口 + 过期数据剔除 解决翻滚窗口触发器缓存一天数据进行计算的问题
+ *
  * 触发器类型:
  * EventTimeTrigger：通过对比 Watermark 和窗口的 Endtime 确定是否触发窗口计算，如果 Watermark 大于 Window EndTime 则触发，否则不触发，窗口将继续等待。
  * ProcessTimeTrigger：通过对比 ProcessTime 和窗口 EndTime 确定是否触发窗口，如果 ProcessTime 大于 EndTime 则触发计算，否则窗口继续等待。
@@ -87,7 +90,7 @@ public class PVUVCountKeyById {
 
         FlinkJedisPoolConfig conf = new FlinkJedisPoolConfig.Builder().setHost("localhost").setPort(6379).build();
 
-        // 分组窗口 + 过期数据剔除 解决翻滚窗口触发器缓存一天数据进行计算的问题
+        //
         userClickSingleOutputStreamOperator
                 // 把 DataStream 按照用户的访问时间所在天进行分组
                 .keyBy(new KeySelector<UserClick, String>() {

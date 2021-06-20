@@ -15,13 +15,16 @@ import org.apache.flink.util.Collector;
 /**
  * 状态：ValueState
  * <p>
- * Operator State 的实际应用场景不如 Keyed State 多，一般来说它会被用在 Source 或 Sink 等算子上，用来保存流入数据的偏移量或对输出数据做缓存，以保证 Flink 应用的 Exactly-Once 语义。
+ * Operator State 的实际应用场景不如 Keyed State 多，
+ * 一般来说它会被用在 Source 或 Sink 等算子上，用来保存流入数据的偏移量或对输出数据做缓存，以保证 Flink 应用的 Exactly-Once 语义。
  *
  * @Author zhengqiang.tan
  * @Date 2020/10/20 8:41 PM
  * @Version 1.0
  * 通过继承 RichFlatMapFunction 来访问 State
  * https://kaiwu.lagou.com/course/courseInfo.htm?courseId=81#/detail/pc?id=2044
+ *
+ * https://www.cnblogs.com/zz-ksw/p/12973639.html
  */
 public class CountWindowAverage extends RichFlatMapFunction<Tuple2<Long, Long>, Tuple2<Long, Long>> {
 
@@ -57,9 +60,9 @@ public class CountWindowAverage extends RichFlatMapFunction<Tuple2<Long, Long>, 
         ValueStateDescriptor<Tuple2<Long, Long>> descriptor =
                 new ValueStateDescriptor<>(
                         "average", // state的名字
-                        TypeInformation.of(new TypeHint<Tuple2<Long, Long>>() {
-                        })
+                        TypeInformation.of(new TypeHint<Tuple2<Long, Long>>() {})
                 ); // 设置默认值
+        descriptor.setQueryable("average");
         StateTtlConfig ttlConfig = StateTtlConfig
                 .newBuilder(Time.seconds(10))
                 .setUpdateType(StateTtlConfig.UpdateType.OnCreateAndWrite)

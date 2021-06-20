@@ -42,12 +42,13 @@ public class TransactionStreamingCEP {
                 new TransactionEvent("100XX", 500.0D, 1597905239000L),
                 new TransactionEvent("101XX", 0.0D, 1597905240000L),
                 new TransactionEvent("101XX", 100.0D, 1597905241000L)
-        ).assignTimestampsAndWatermarks(new BoundedOutOfOrdernessGenerator()).keyBy(new KeySelector<TransactionEvent, Object>() {
-            @Override
-            public Object getKey(TransactionEvent value) throws Exception {
-                return value.getAccout();
-            }
-        });
+        ).assignTimestampsAndWatermarks(new BoundedOutOfOrdernessGenerator())
+                .keyBy(new KeySelector<TransactionEvent, Object>() {
+                    @Override
+                    public Object getKey(TransactionEvent value) throws Exception {
+                        return value.getAccout();
+                    }
+                });
 
         /**
          * 定义pattern
@@ -69,7 +70,7 @@ public class TransactionStreamingCEP {
 
                 List<TransactionEvent> start = match.get("start");
                 List<TransactionEvent> next = match.get("next");
-                System.err.println("start:" + start + ",next:" + next);
+                System.err.println("start:" + start + "\n next:" + next);
 
                 out.collect(new AlertEvent(start.get(0).getAccout(), "连续有效交易！"));
             }

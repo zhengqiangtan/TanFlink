@@ -46,7 +46,8 @@ public class LoginStreamingCEP {
                 new LogInEvent(3L, "fail", 1597905239000L),
                 new LogInEvent(3L, "success", 1597905240000L)
 
-        ).assignTimestampsAndWatermarks(new BoundedOutOfOrdernessGenerator()).keyBy(new KeySelector<LogInEvent, Object>() {
+        ).assignTimestampsAndWatermarks(new BoundedOutOfOrdernessGenerator())
+                .keyBy(new KeySelector<LogInEvent, Object>() {
             @Override
             public Object getKey(LogInEvent value) throws Exception {
                 return value.getUserId();
@@ -73,6 +74,8 @@ public class LoginStreamingCEP {
          * 将 Pattern 和 Stream 结合在一起，在匹配到事件后先在控制台打印，并且向外发送。
          */
         PatternStream<LogInEvent> patternStream = CEP.pattern(source, pattern);
+
+
 
         SingleOutputStreamOperator<AlertEvent> process = patternStream.process(new PatternProcessFunction<LogInEvent, AlertEvent>() {
             @Override

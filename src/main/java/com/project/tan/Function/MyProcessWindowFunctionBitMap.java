@@ -15,7 +15,7 @@ import org.roaringbitmap.longlong.Roaring64NavigableMap;
 import java.util.Iterator;
 
 /**
- * BitMap去重函数
+ * BitMap精确去重函数
  * <p>
  * 假如用户的 ID 可以转化为 Long 型，可以使用 BitMap 进行去重计算 UV
  * 如果业务中的用户 ID 是字符串类型，不能被转化为 Long 型，那么你可以使用布隆过滤器进行去重。
