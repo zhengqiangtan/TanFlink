@@ -140,8 +140,7 @@ public class HotItemsExample {
         // 定时回调的方法
         @Override
         public void onTimer(long timestamp, OnTimerContext ctx, Collector<String> out) throws Exception {
-            Tuple currentKey = ctx.getCurrentKey();
-
+//            Tuple currentKey = ctx.getCurrentKey();
 
             // 获取收到的所有商品点击量
             List<ItemViewCount> allItems = new ArrayList<>();
@@ -183,7 +182,7 @@ public class HotItemsExample {
     }
 
     /**
-     * 用于输出窗口的结果
+     * 用于输出窗口的结果（每个商品在每个窗口的点击量的数据流）
      */
     public static class WindowResultFunction implements WindowFunction<Long, ItemViewCount, Tuple, TimeWindow> {
 
@@ -193,7 +192,7 @@ public class HotItemsExample {
                 TimeWindow window,  // 窗口
                 Iterable<Long> aggregateResult, // 聚合函数的结果，即 count 值
                 Collector<ItemViewCount> collector  // 输出类型为 ItemViewCount
-        ) throws Exception {
+        ) {
             Long itemId = ((Tuple1<Long>) key).f0;
             Long count = aggregateResult.iterator().next();
             collector.collect(ItemViewCount.of(itemId, window.getEnd(), count));
