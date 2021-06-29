@@ -87,7 +87,6 @@ public class CepDemo_1 {
     }
 
 }
-
 //        Marry:2:连续搜索两次帽子!
 //        Marry:3:连续搜索两次帽子!
 //        Marry:5:连续搜索两次帽子!
