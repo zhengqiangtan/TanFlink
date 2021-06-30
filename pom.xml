@@ -100,12 +100,44 @@ under the License.
             <version>${flink.version}</version>
         </dependency>
 
+       <!--CEP规则-->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-cep_2.11</artifactId>
             <version>${flink.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.haoch</groupId>
+            <artifactId>flink-siddhi-parent_2.11</artifactId>
+            <version>0.2.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.siddhi</groupId>
+            <artifactId>siddhi-core</artifactId>
+            <version>4.4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.siddhi</groupId>
+            <artifactId>siddhi-query-compiler</artifactId>
+            <version>4.4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.siddhi</groupId>
+            <artifactId>siddhi-query-api</artifactId>
+            <version>4.4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.siddhi</groupId>
+            <artifactId>siddhi-annotations</artifactId>
+            <version>4.4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.siddhi</groupId>
+            <artifactId>siddhi-service</artifactId>
+            <version>4.3.9</version>
+        </dependency>
 
+        <!--运行时编译组件-->
         <dependency>
             <groupId>org.codehaus.janino</groupId>
             <artifactId>janino</artifactId>
@@ -194,6 +226,8 @@ under the License.
             <artifactId>fastjson</artifactId>
             <version>1.2.72</version>
         </dependency>
+
+
 
         <!-- Add connector dependencies here. They must be in the default scope (compile). -->
         <!-- Example:
